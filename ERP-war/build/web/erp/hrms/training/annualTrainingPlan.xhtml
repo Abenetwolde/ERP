@@ -1,0 +1,435 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition 
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    template="../../../resources/templates/template.xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:define name="navigaion_content"> 
+        <li><a href="../hrmsDashboard.xhtml" title="Go to Dashboard"><i class="fa  fa-fw fa-dashboard"></i> <span>#{HRMS.Dashboard}</span></a></li> 
+        <li><a href="trainingCourse.xhtml"><i class="fa fa-circle-o"></i><span>#{HRMS.Training_Course}</span></a></li>
+        <li><a href="trainingInstitutionProfile.xhtml"><i class="fa fa-circle-o"></i><span>#{HRMS.Training_Institution_Profile}</span></a></li>
+        <li><a href="annualTrainingRequest.xhtml"><i class="fa fa-circle-o"></i><span>#{HRMS.Annual_Training_Request}</span></a></li>
+        <li><a href="annualTrainingApprove.xhtml"><i class="fa fa-circle-o"></i><span>#{HRMS.Annual_Training_Approve}</span></a></li>
+        <li class="treeview">
+            <a href="#treeview-menu">
+                <i class="alert-link"></i>
+                <span>#{HRMS.Unplanned_Training}</span>
+                <i class="fa fa-angle-left pull-right"></i>
+                <ul class="treeview-menu">
+                    <li><a href="unplannedTrainingRequest.xhtml"><i class="fa fa-circle-o"></i>#{HRMS.Unplanned_Training_Request}</a></li>
+                    <li><a href="unplannedTrainingApproval.xhtml"><i class="fa fa-circle-o"></i>#{HRMS.Unplanned_Training_Approval}</a></li> 
+                    <li><a href="trainingHistory.xhtml"><i class="fa fa-circle-o"></i>#{HRMS.Employee_Training_History}</a></li> 
+                </ul>
+            </a> 
+        </li>
+       <li class="treeview">
+            <a href="#treeview-menu">
+                <i class="alert-link"></i>
+                <span>#{HRMS.Education_and_Training_Programs}</span>
+                <i class="fa fa-angle-left pull-right-xs"></i>
+                <ul class="treeview-menu">
+                    <li><a href="inlandAndForeignEducationPrograms.xhtml"><i class="fa fa-circle-o"></i>#{HRMS.Inland_And_Foreign_Education_Program}</a></li>
+                </ul>
+                <ul class="treeview-menu">
+                    <li><a href="inlandAndForeignTrainingPrograms.xhtml"><i class="fa fa-circle-o"></i>#{HRMS.Inland_And_Foreign_Training_programs}</a></li>
+                </ul>
+            </a> 
+        </li>
+        <li class="treeview">
+            <a href="#treeview-menu">
+                <i class="alert-link"></i>
+                <span>#{HRMS.Internship}</span>
+                <i class="fa fa-angle-left pull-right"></i>
+                <ul class="treeview-menu">
+                    <li><a href="maintainUniversity.xhtml"><i class="fa fa-circle-o"></i><span>#{HRMS.Maintain_University}</span></a></li>
+                    <li><a href="internshipStudentDetails.xhtml"><i class="fa fa-circle-o"></i><span>#{HRMS.Internship_Student_Details}</span></a></li>
+                    <li><a href="internshipPlacement.xhtml"><i class="fa fa-circle-o"></i><span>#{HRMS.Internship_Placement}</span></a></li> 
+                    <li><a href="internshipPayment.xhtml"><i class="fa fa-circle-o"></i><span>#{HRMS.Internship_payment}</span></a></li>
+                    <li><a href="internshipStatus.xhtml"><i class="fa fa-circle-o"></i><span>#{HRMS.Internship_status}</span></a></li>
+                </ul>
+            </a> 
+        </li>
+        <li class="treeview">
+            <a href="#treeview-menu">
+                <i class="alert-link"></i>
+                <span>#{HRMS.Electro_Mechanics_Courses}</span>
+                <i class="fa fa-angle-left pull-right"></i>
+                <ul class="treeview-menu">
+                    <li><a href="preServiceCourses.xhtml"><i class="fa fa-circle-o"></i><span>#{HRMS.Pre_Service_Course}</span></a></li>
+                    <li><a href="preServiceTrainees.xhtml"><i class="fa fa-circle-o"></i><span>#{HRMS.Pre_Service_Trainees}</span></a></li>
+                    <li><a href="preServiceTrainersResult.xhtml"><i class="fa fa-circle-o"></i><span>#{HRMS.Pre_Service_Trainees_Result}</span></a></li>
+                </ul>
+            </a> 
+        </li>
+    </ui:define>
+    <ui:define name="contents">
+        <h:form id="frmToolBar"> 
+            <p:toolbar style="background-color:white;border-color: white ; margin-bottom: 10px">
+                <f:facet name="right">
+                    <a href="../../hrms/training/annualTrainingPlan.xhtml"><i class="fa fa-fw fa-refresh" title="#{HRMS.Refresh}"></i></a>
+                    <span class="ui-separator">
+                        <span class="ui-icon ui-icon-grip-dotted-vertical"/>
+                    </span>
+                        <a href="../../hrms/hrmsDashboard.xhtml"><i class="fa fa-fw fa-dashboard" title="#{HRMS.Dashboard}"></i></a>
+                    <span class="ui-separator">
+                        <span class="ui-icon ui-icon-grip-dotted-vertical"/>
+                    </span>
+                        <a href="../../../HomePage.xhtml"><i class="fa fa-home" title="#{HRMS.Home_Page}"></i></a>
+                </f:facet>
+            </p:toolbar>
+        </h:form>  
+        <h:form id="frmAnnualTrainingPlan"> 
+            <h:panelGroup id="pnlTrainRequest">
+                <p:growl id="growl" showDetail="true" autoUpdate="true" severity="information, fatal"/>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="box box-primary">
+                            <div class="box-header with-border">
+                                <h3 class="box-title">#{HRMS.Annual_Training_Plan}</h3>
+                            </div>
+                            <div class="box-body">
+                                <div class="box-body"> 
+                                    <div class="box-header">
+                                        <h1 class="box-title">#{HRMS.Training_Needs}</h1>                       
+                                    </div>
+                                    <section class="panel panel-info">
+                                        <section class="panel-body">
+                                            <h:panelGroup id="pnlAnnualNeedTable">
+                                                <div class="form-group">
+                                                    <div class="col-sm-12">
+                                                        <div class="col-md-6">
+                                                            <div class="col-md-12 textBoxMargin6px">
+                                                                <div class="form-group required form-horizontal">
+                                                                    <h:outputLabel for="drdYear" value="#{HRMS.Budget_Year}: "  class="col-sm-4 control-label" title="Budget Year"/>                                   
+                                                                    <div class="col-sm-8">
+                                                                        <p:selectOneMenu id="drdYear" value="#{annualTrainingPlanControlller.hrTdAnnualNeedRequests.budgetYear}"
+                                                                                         valueChangeListener="#{annualTrainingPlanControlller.budgetYear_vlc}" style="width:100%"
+                                                                                         required="true" requiredMessage="Select Budget year">
+                                                                            <f:selectItem itemLabel="--- #{HRMS.select} ---" itemValue=""/>
+                                                                            <f:selectItems value="#{annualTrainingPlanControlller.budgetYearList}"/>
+                                                                            <p:ajax event="change" process="@this" update="tblAnnualNeed,pnlSave"/>
+                                                                        </p:selectOneMenu> 
+                                                                        <p:message for="drdYear" display="icon"/>
+                                                                    </div>
+                                                                </div>                                                                                                       
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div><br></br>
+                                                <div class="form-group">
+                                                    <div class="col-md-12">  
+                                                        <div class="col-md-12">
+                                                            <div class="form-group">
+                                                                <p:dataTable id="tblAnnualNeed" value="#{annualTrainingPlanControlller.annualTrainingPlanDataModel}"
+                                                                             rows="10" rowsPerPageTemplate="5,10,15"  paginator="true" paginatorPosition="bottom"
+                                                                             var="need" rowIndexVar="num" class="dataTable" rowKey="#{need.id}">
+                                                                    <p:column style="width:40px;">
+                                                                        <f:facet name="header">
+                                                                            <h:outputText value="#{HRMS.No}"/>
+                                                                        </f:facet>
+                                                                        <h:outputText value="#{num+1}"/> 
+                                                                    </p:column>  
+                                                                    <p:column style="width:150px;">
+                                                                        <f:facet name="header">
+                                                                            <h:outputText value="#{HRMS.Training_Course}"/>
+                                                                        </f:facet>
+                                                                        <h:outputText value="#{need.trainingId.courseName}"/> 
+                                                                    </p:column> 
+                                                                    <p:column>
+                                                                        <f:facet name="header">
+                                                                            <h:outputText value="#{HRMS.Department}"/>
+                                                                        </f:facet>
+                                                                        <h:outputText value="#{need.dept}"/> 
+                                                                    </p:column> 
+                                                                    <p:column style="width:150px;">
+                                                                        <f:facet name="header">
+                                                                            <h:outputText value="#{HRMS.Total_Participant}"/>
+                                                                        </f:facet>
+                                                                        <h:outputText value="#{need.totalParticipant}"/> 
+                                                                    </p:column>
+                                                                    <p:column headerText="#{HRMS.Option}" style="width:110px;">
+                                                                        <p:commandLink value="#{HRMS.Add_Detail}" action="#{annualTrainingPlanControlller.addDetail()}"
+                                                                                       process="@this" update="@this,:frmAnnualTrainingPlan:pnlTrainingPlan">  
+                                                                        </p:commandLink>
+                                                                    </p:column>
+                                                                </p:dataTable>
+                                                            </div>
+                                                        </div>
+                                                    </div> 
+                                                </div> 
+                                            </h:panelGroup>
+                                        </section>
+                                    </section>
+                                    <div class="box-header">
+                                        <h1 class="box-title">#{HRMS.Training_Plan}</h1>                       
+                                    </div>
+                                    <section class="panel panel-info">
+                                        <section class="panel-body">
+                                            <h:panelGroup id="pnlTrainingPlan" class="col-sm-12">
+                                                <div class="form-group">
+                                                    <div class="col-sm-12">
+                                                        <div class="col-md-6">
+                                                            <div class="col-md-12 textBoxMargin6px">
+                                                                <div class="form-group required form-horizontal">
+                                                                    <h:outputLabel for="drdInstitution" value="#{HRMS.Institution}: " class="control-label col-sm-4"/>
+                                                                    <div class="col-sm-8">
+                                                                        <p:selectOneMenu id="drdInstitution" value="#{annualTrainingPlanControlller.hrTdTrainerProfiles.id}" 
+                                                                                         valueChangeListener="#{annualTrainingPlanControlller.institution_vlc}"
+                                                                                         filter="true" filterMatchMode="startsWith" style="width:100%;"
+                                                                                         required="true" requiredMessage="Select institution type">      
+                                                                            <f:selectItem itemLabel="--- #{HRMS.select} ---" noSelectionOption="true"/>
+                                                                            <f:selectItems  value="#{annualTrainingPlanControlller.hrTdTrainerProfilesList}"
+                                                                                            var="ins" itemLabel="#{ins.institutionName}" itemValue="#{ins.id}"/>  
+                                                                        </p:selectOneMenu>                                                        
+                                                                        <p:message for="drdInstitution" display="icon"/>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-12 textBoxMargin6px">
+                                                                <div class="form-group required form-horizontal">
+                                                                    <h:outputLabel for="txtnoOfNominee" class="control-label col-sm-4" value="#{HRMS.Participant_Needed}: " title="Number of Participant"/>
+                                                                    <div class="col-sm-8">
+                                                                        <p:inputText id="txtnoOfNominee" value="#{annualTrainingPlanControlller.hrTdAnnualPlanGroup.participantNeeded}" 
+                                                                                     class="form-control" required="true" requiredMessage="Enter Number of Participant" title="Number of Participant"
+                                                                                     validator="#{validatorManagedBean.Number}" converterMessage="Number of Participant should be number"
+                                                                                     placeholder="Number of Participant"/>                                                                
+                                                                        <p:message for="txtnoOfNominee" display="icon"/>
+                                                                    </div>
+                                                                </div>
+                                                            </div> 
+                                                            <div class="col-md-12 textBoxMargin6px">
+                                                                <div class="form-group required form-horizontal">
+                                                                    <h:outputLabel for="txtStartDate" value="#{HRMS.Start_Date}: " class="control-label col-sm-4" title="Start Date"/>
+                                                                    <div class="col-sm-8">
+                                                                        <p:inputText id="txtStartDate" value="#{annualTrainingPlanControlller.hrTdAnnualPlanGroup.startDate}"
+                                                                                     onclick="displayCalendar('frmAnnualTrainingPlan:txtStartDate', 'frmAnnualTrainingPlan:txtStartDate');"
+                                                                                     validator="#{validatorManagedBean.Date}" validatorMessage="Incorrect date format"
+                                                                                     required="true" class="form-control" requiredMessage="Enter start date"/>                                                                                                                                                
+                                                                        <p:message for="txtStartDate" display="icon" />
+                                                                    </div>
+                                                                </div>
+                                                            </div> 
+                                                            <div class="col-md-12 textBoxMargin6px">
+                                                                <div class="form-group required form-horizontal">
+                                                                    <h:outputLabel for="txtcostPerPerson" value="#{HRMS.Cost_per_Person}: " class="control-label col-sm-4"/>
+                                                                    <div class="col-sm-8">
+                                                                        <p:inputText id="txtcostPerPerson" value="#{annualTrainingPlanControlller.hrTdAnnualPlanGroup.costPerPerson}"
+                                                                                     class="form-control" required="true" requiredMessage="Enter Cost for a Person" placeholder="Cost per person"
+                                                                                     validator="#{validatorManagedBean.Number}" converterMessage="Estimated Cost must be a number"/>                                                                
+                                                                        <p:message for="txtcostPerPerson" display="icon"/>
+                                                                    </div>
+                                                                </div>
+                                                            </div> 
+                                                            <div class="col-sm-12 form-horizontal">
+                                                                <div class="col-sm-4">                                                              
+                                                                </div>                                                                    
+                                                                <div class="col-sm-3">
+                                                                    <center>
+                                                                        <p:commandButton id="btnAdd" value="#{annualTrainingPlanControlller.localBeanObj.addOrModify}" class="btn  btn-block btn-primary col-lg-4"
+                                                                                         action="#{annualTrainingPlanControlller.addPlanGroup()}" style="margin-top: 10px"
+                                                                                         disabled="#{annualTrainingPlanControlller.disableBtnAdd}" title="Add Detail" 
+                                                                                         process="@this,pnlTrainingPlan" update="@this,pnlTrainingPlan"/>
+                                                                    </center>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="col-md-12 textBoxMargin6px">
+                                                                <div class="form-group required form-horizontal">
+                                                                    <h:outputLabel for="txtGroupName" value="#{HRMS.Round}: " class="control-label col-sm-4"/>
+                                                                    <div class="col-sm-8">
+                                                                        <p:inputText id="txtGroupName" value="#{annualTrainingPlanControlller.hrTdAnnualPlanGroup.groupName}"  
+                                                                                     class="form-control" required="true" requiredMessage="Enter Group Name" title="Group Name"
+                                                                                     validatorMessage="Group Name should be string"/>                                                                
+                                                                        <p:message for="txtGroupName" display="icon"/>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-12 textBoxMargin6px">
+                                                                <div class="form-group required form-horizontal">
+                                                                    <h:outputLabel for="txtVenue" value="#{HRMS.Venue}: " class="control-label col-sm-4"/>
+                                                                    <div class="col-sm-8">
+                                                                        <p:inputText id="txtVenue" value="#{annualTrainingPlanControlller.hrTdAnnualPlanGroup.venue}"  
+                                                                                     class="form-control" required="true" requiredMessage="Enter Venue (training place)" title="Training place"
+                                                                                     validator="#{validatorManagedBean.Text}" validatorMessage="Venue should be string"/>                                                                
+                                                                        <p:message for="txtVenue" display="icon"/>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-12 textBoxMargin6px">
+                                                                <div class="form-group required form-horizontal">
+                                                                    <h:outputLabel for="txtEndDate" value="#{HRMS.End_Date}: " class="control-label col-sm-4" title="End Date"/>
+                                                                    <div class="col-sm-8">
+                                                                        <p:inputText id="txtEndDate" value="#{annualTrainingPlanControlller.hrTdAnnualPlanGroup.endDate}"
+                                                                                     onclick="displayCalendar('frmAnnualTrainingPlan:txtEndDate', 'frmAnnualTrainingPlan:txtEndDate');"
+                                                                                     validator="#{validatorManagedBean.Date}" validatorMessage="Incorrect date format"
+                                                                                     required="true" requiredMessage="Enter end date" class="form-control"/>                                                                                                                                                    
+                                                                        <p:message for="txtEndDate" display="icon"/>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-12 textBoxMargin6px">
+                                                                <div class="form-group form-horizontal">
+                                                                    <h:outputLabel for="txtRemark" value="#{HRMS.Remark}:" class="control-label col-sm-4"/>
+                                                                    <div class="col-sm-8">
+                                                                        <p:inputTextarea id="txtRemark" value="#{annualTrainingPlanControlller.hrTdAnnualPlanGroup.remark}"
+                                                                                         rows="1" cols="6" autoResize="false" title="Description" class="form-control"/>
+                                                                        <p:message for="txtRemark" display="icon"/>
+                                                                    </div>
+                                                                </div>                                            
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <br></br><br></br><br></br><br></br><br></br>  
+                                                <br></br><br></br><br></br><br></br><br></br>  
+                                                <div class="col-md-12">  
+                                                    <div class="col-md-12">
+                                                        <div class="form-group">
+                                                            <p:dataTable id="tblTrainingPlan" value="#{annualTrainingPlanControlller.annualPlansGroupDataModel}" 
+                                                                         var="plan" rowIndexVar="num" rowKey="#{plan.id}" class="dataTable textBoxMargin6px">
+                                                                <p:column style="width:40px;">
+                                                                    <f:facet name="header">
+                                                                        <h:outputText value="#{HRMS.No}"/>
+                                                                    </f:facet>
+                                                                    <h:outputText value="#{num+1}"/> 
+                                                                </p:column>  
+                                                                <p:column>
+                                                                    <f:facet name="header">
+                                                                        <h:outputText value="#{HRMS.Course_Name}"/>
+                                                                    </f:facet>
+                                                                    <h:outputText value="#{plan.annPlanId.trainingId.courseName}"/> 
+                                                                </p:column> 
+                                                                <p:column>
+                                                                    <f:facet name="header">
+                                                                        <h:outputText value="#{HRMS.Institution}"/>
+                                                                    </f:facet>
+                                                                    <h:outputText value="#{plan.insId.institutionName}"/> 
+                                                                </p:column> 
+                                                                <p:column>
+                                                                    <f:facet name="header">
+                                                                        <h:outputText value="#{HRMS.Participant_Needed}"/>
+                                                                    </f:facet>
+                                                                    <h:outputText value="#{plan.participantNeeded}"/> 
+                                                                </p:column> 
+                                                                <p:column>
+                                                                    <f:facet name="header">
+                                                                        <h:outputText value="#{HRMS.Cost_per_Person}"/>
+                                                                    </f:facet>
+                                                                    <h:outputText value="#{plan.costPerPerson}"/> 
+                                                                </p:column> 
+                                                                <p:column>
+                                                                    <f:facet name="header">
+                                                                        <h:outputText value="#{HRMS.Group_Name}"/>
+                                                                    </f:facet>
+                                                                    <h:outputText value="#{plan.groupName}"/> 
+                                                                </p:column> 
+                                                                <p:column>
+                                                                    <f:facet name="header">
+                                                                        <h:outputText value="#{HRMS.Venue}"/>
+                                                                    </f:facet>
+                                                                    <h:outputText value="#{plan.venue}"/> 
+                                                                </p:column>
+                                                                <p:column>
+                                                                    <f:facet name="header">
+                                                                        <h:outputText value="#{HRMS.Start_Date}"/>
+                                                                    </f:facet>
+                                                                    <h:outputText value="#{plan.startDate}"/> 
+                                                                </p:column> 
+                                                                <p:column>
+                                                                    <f:facet name="header">
+                                                                        <h:outputText value="#{HRMS.End_Date}"/>
+                                                                    </f:facet>
+                                                                    <h:outputText value="#{plan.endDate}"/> 
+                                                                </p:column> 
+                                                                <p:column>
+                                                                    <f:facet name="header">
+                                                                        <h:outputText value="#{HRMS.Remark}"/>
+                                                                    </f:facet>
+                                                                    <h:outputText value="#{plan.remark}"/> 
+                                                                </p:column> 
+                                                                <p:column headerText="#{HRMS.Option}" style="width:130px;">
+                                                                    <p:commandLink value="#{HRMS.Edit}" action="#{annualTrainingPlanControlller.editPlanGroup()}"
+                                                                                   process="@this" update="@this,:frmAnnualTrainingPlan:pnlTrainingPlan">  
+                                                                    </p:commandLink>
+                                                                </p:column>
+                                                            </p:dataTable>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </h:panelGroup>
+                                        </section>
+                                    </section> 
+                                    <section class="panel panel-info">
+                                        <section class="panel-body">
+                                            <h:panelGroup id="pnlPreparer">                                                                   
+                                                <div class="form-group">
+                                                    <div class="col-sm-12">
+                                                        <div class="col-sm-6">   
+                                                            <div class="col-md-12 textBoxMargin6px">
+                                                                <div class="form-group form-horizontal">
+                                                                    <h:outputLabel for="txtPreparedBy" class="control-label col-sm-4" value="#{HRMS.Processed_By}:" title="User Name"/>
+                                                                    <div class="col-sm-8">
+                                                                        <p:inputText id="txtPreparedBy" value="#{workFlow.userName}"
+                                                                                     title="Prepared By" readonly="true"/>
+                                                                        <p:message for="txtPreparedBy" display="icon"/>
+                                                                    </div>
+                                                                </div>                                            
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6">   
+                                                            <div class="col-md-12 textBoxMargin6px">
+                                                                <div class="form-group form-horizontal">
+                                                                    <h:outputLabel value="#{HRMS.Prepared_On}:" for="txtPreparedDate" class="control-label col-sm-4" title="Prepared On"/>
+                                                                    <div class="col-sm-8">
+                                                                        <p:inputText id="txtPreparedDate" value="#{annualTrainingPlanControlller.preparedDate}" 
+                                                                                     converter="dateConverter" title="Prepared Date" readonly="true"/>
+                                                                        <p:message for="txtPreparedDate" display="icon"/>
+                                                                    </div>
+                                                                </div>                                                                                                       
+                                                            </div>
+                                                        </div> 
+                                                    </div>
+                                                </div> 
+                                            </h:panelGroup>
+                                        </section> 
+                                    </section>
+                                    <h:panelGroup id="pnlSave" class="col-sm-12">
+                                        <div class="panel-body col-sm-12">
+                                            <div class="form-group col-sm-12">
+                                                <div class="col-sm-6">
+                                                    <div class="col-sm-12 form-horizontal">
+                                                        <div class="col-sm-4"></div>                                           
+                                                        <div class="col-sm-3">
+                                                            <p:commandButton id="btnSave" value="#{HRMS.save}" 
+                                                                             action="#{annualTrainingPlanControlller.saveAnnualTrainingPlan()}"
+                                                                             class="btn  btn-block btn-primary col-lg-4"
+                                                                             process="@this,pnlAnnualNeedTable" update=":frmAnnualTrainingPlan"/>
+                                                        </div>
+                                                        <div class="col-sm-3">
+                                                            <p:commandButton id="btnReset" value="#{HRMS.Reset}" class="btn  btn-block btn-primary col-lg-4"                                             
+                                                                             action="#{annualTrainingPlanControlller.clearAnnualTrainingPlan()}" 
+                                                                             process="@this" update=":frmAnnualTrainingPlan"/> 
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </h:panelGroup>
+                                </div>   
+                            </div>                   
+                        </div>                   
+                    </div>
+                </div>
+            </h:panelGroup>
+        </h:form>
+    </ui:define>
+</ui:composition>

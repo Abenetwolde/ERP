@@ -1,0 +1,229 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition 
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    template="../../../resources/templates/template.xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:define name="navigaion_content">
+
+        <li><a href="../MmsNewDashBoard.xhtml"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li> 
+        <li><a href="FixedAssetRegistration.xhtml"><i class="fa fa-circle-o-notch"></i> <span>Fixed Asset Registration</span></a></li> 
+        <li><a href="FixedAssetDepreciation.xhtml"><i class="fa fa-circle-o-notch"></i> <span>Fixed Asset Depreciation</span></a></li> 
+
+    </ui:define>
+    <ui:define name="contents">
+
+        <h:form id="frmToolbar"> 
+            <p:toolbar style="background-color:white;border-color: white">
+                <f:facet name="right">
+
+                    <span class="ui-separator">
+                        <span class="ui-icon ui-icon-grip-dotted-vertical" />
+                    </span>
+                    <a href="UserCard.xhtml"><i class="fa fa-fw fa-refresh"></i>  </a>
+                    <span class="ui-separator">
+                        <span class="ui-icon ui-icon-grip-dotted-vertical" />
+                    </span>
+                    <a href="../MmsNewDashBoard.xhtml"><i class="fa fa-fw fa-dashboard"></i>  </a>
+                    <span class="ui-separator" >
+                        <span class="ui-icon ui-icon-grip-dotted-vertical" />
+                    </span>  
+                </f:facet>
+            </p:toolbar>
+        </h:form>
+
+        <h:form id="frmMainUI">
+            <h:panelGroup style="border: 0px; background-color: transparent" id="mainUI" rendered="#{userCardController.renderPnlManPage}">
+                <div class="box box-primary">
+                    <div class="box-header with-border">
+<!--                        <h3 class="box-title">Search ...</h3>-->
+                        <p:commandButton value="Print" type="button" icon="pi pi-print" style="display:block;margin-bottom: 20px;">
+                            <p:printer target="padd" />
+                        </p:commandButton>
+                    </div>
+                    <div class="box-body">
+                        <h:panelGroup id="padd">
+                        <div class="row"> 
+                            <div class="col-md-12" > 
+                                <h:panelGroup id="frmSearchGatePass"> 
+
+
+                                    <div class="form-horizontal  col-sm-12">
+                                        <div class="form-group textBoxMargin8px"> 
+                                           <!-- <div class="col-sm-2">
+                                            <img src="../../resources/img/Insalogo_1.png" height="40" alt="INSA LOGO"/>
+                                            </div> -->
+                                        <div class="col-sm-6">
+                                             <h:outputLabel class="control-label col-sm-6" value=""/>
+                                             </div>
+                                        </div>
+                                        <div class="form-group textBoxMargin6px"> 
+                                            <h:outputLabel class="control-label col-sm-6" value=""/>
+                                        </div>
+                                        <div class="form-group textBoxMargin6px">
+                                            <h:outputLabel class="control-label col-sm-2" value="Employee Id:" />
+                                            <div class="col-sm-4">
+                                                <p:autoComplete id="SearchCounter1"  emptyMessage="no data" forceSelection="true" 
+                                                                maxResults="10"
+                                                                readonly="#{userCardController.disableReadolnly}"                                                                 
+                                                                value="#{userCardController.employeesuc}"
+                                                                completeMethod="#{userCardController.regstrationsuc}" converter="entConverter"
+                                                                var="uc" itemLabel="#{uc.empId}" itemValue="#{uc}" size="50"
+                                                                >
+                                                    
+                                                    
+                                                    
+                                                    <p:column headerText="First Name" >
+                                                        <h:outputText  value="#{uc.firstName} #{uc.middleName}" />
+                                                    </p:column>
+
+                                                    <p:column  headerText="Emp ID">
+                                                        <h:outputText value="#{uc.empId}" />
+                                                    </p:column>
+
+                                                    <p:ajax  event="itemSelect"  process="@this" update=":frmMainUI" listener="#{userCardController.SearchUC}"/>
+                                                </p:autoComplete>     
+                                                <p:message for="SearchCounter1" display="icon" />
+                                            </div>
+                                            
+                                        </div>
+                                        <div class="form-group textBoxMargin6px"> 
+                                            <h:outputLabel class="control-label col-sm-2" value="Employee Name:"/>
+
+                                            <div class="col-sm-4">
+                                                <p:inputText id="txtempname" class="form-control" readonly="true" value="#{userCardController.employeesuc.firstName} #{userCardController.employeesuc.middleName} #{userCardController.employeesuc.lastName}"/>
+                                            </div>
+                                            
+                                           
+                                        </div>
+                                        <div class="form-group textBoxMargin6px"> 
+                                            <h:outputLabel class="control-label col-sm-2" value="Department:"/>
+
+                                            <div class="col-sm-4">
+                                                <p:inputText id="txtFARNUmber" class="form-control" readonly="true" value="#{userCardController.employeesuc.deptId.depName}"/>
+                                            </div>
+                                        </div>
+
+<!--                                        <div class="form-group textBoxMargin6px"> 
+                                            <h:outputLabel id="FindInfo" class="control-label col-sm-2"/>
+                                            <div class="col-sm-4">
+                                                <p:commandButton id="btnFind" class="btn btn-primary"  action="#/{fixedAssetRegController.SearchUC}" icon="ui-icon-search" 
+                                                                 process="@this,frmSearchGatePass" update=":frmMainUI:frmGatepass:tblgatePassInfo,:frmMainUI:mainUI"
+                                                                 value="Find" style="font-family: monospace; font-style: normal; font-weight: normal; left: 0px;"/>            
+                                            </div>
+                                        </div>-->
+                                    </div>
+
+
+
+                                </h:panelGroup>
+                            </div>
+                        </div>
+
+
+                        <div class="row"> 
+                            <div class="col-md-12" > 
+                                <h:form id="frmGatepass">   
+
+
+                                    <div class="form-horizontal col-sm-12">
+                                        <div class="form-group textBoxMargin6px">                                        
+                                            <div class="col-sm-12">
+                                                <p:dataTable id="tblgatePassInfo" var="FxAssetInfo" rows="10" 
+                                                             style="font-family: Cambria; "  
+                                                             rowIndexVar="rowContact" 
+                                                             rowKey="#{FxAssetInfo.farId}"  
+                                                             value="#{userCardController.dataModelucdtl}"
+                                                             class="dataTable"
+                                                             paginator="true" paginatorPosition="bottom">
+
+
+                                                    <p:column style="width: 50px">
+                                                        <f:facet name="header" >
+                                                            <h:outputText value="No"/>
+                                                        </f:facet>
+                                                        <h:outputText value="#{rowContact+1}"/>
+                                                    </p:column>
+
+                                                    <p:column>
+                                                        <f:facet name="header">
+                                                            <h:outputText value="Material Name " />
+                                                        </f:facet>
+                                                        <h:outputText value="#{FxAssetInfo.itemId.matName}"/>
+                                                    </p:column>
+
+                                                    <p:column style="width: 350px">
+                                                        <f:facet name="header">
+                                                            <h:outputText value="Tag No" />
+                                                        </f:facet>
+                                                        <h:outputText value="#{FxAssetInfo.tagNo}"/>
+                                                    </p:column>
+
+                                                    <p:column>
+                                                        <f:facet name="header">
+                                                            <h:outputText value="Serial No" />
+                                                        </f:facet>
+                                                        <h:outputText value="#{FxAssetInfo.serialno}"/>
+                                                    </p:column>
+                                                    <p:column>
+                                                        <f:facet name="header">
+                                                            <h:outputText value="SIV No" />
+                                                        </f:facet>
+                                                        <h:outputText value="#{FxAssetInfo.sivNo}"/>
+                                                    </p:column>
+                                                    <p:column>
+                                                        <f:facet name="header">
+                                                            <h:outputText value="Purchase Date " />
+                                                        </f:facet>
+                                                        <h:outputText value="#{FxAssetInfo.purchasedDate}" >
+                                                            <f:convertDateTime type="date" pattern="dd-MM-yyyy"/>
+                                                         </h:outputText>
+                                                    </p:column>
+                                                    <p:column>
+                                                        <f:facet name="header">
+                                                            <h:outputText value="Intial Unit Price" />
+                                                        </f:facet>
+                                                        <h:outputText value="#{FxAssetInfo.unitPrice}"/>
+                                                    </p:column>
+                                                </p:dataTable>
+                                            </div>                 
+                                        </div>    
+                                    </div>  
+                                </h:form>
+                            </div>
+                        </div>
+                          <!--  <div class="form-group textBoxMargin6px">
+                            <h:outputLabel for="name" value="ማሳሰቢያ፡-" />
+                            </div>
+                            <div class="form-group textBoxMargin6px">
+                            <h:outputLabel for="name" value="1  የቋሚ ንብረት ተጠቃሚዎች በስማቸው ያሉ ንብረቶችን  በአግባቡ መያዝ ይጠበቅባቸዋል፡፡" />
+                            </div>
+                            <div class="form-group textBoxMargin6px">
+                            <h:outputLabel for="name" value="2  ንብረት ሲጠፋ ወይም ሲበላሽ ወዲያውኑ ለንብረት አስተዳደር የስራ ክፍል ሪፖርት ማድረግ ያስፈልጋል፡፡" />
+                            </div>
+                            <div class="form-group textBoxMargin6px">
+                            <h:outputLabel for="name" value="3  በንብረት አስተዳደር የስራ ክፍል ከመፈቀዱ በፊት ቋሚ ንብረትን ለሌላ ተጠቃሚ ማስተላለፍ ፈፅሞ የተከለከለ ነው፡፡" />
+                            </div>
+                            <div class="form-group textBoxMargin6px">
+                            <h:outputLabel for="name" value="4  ይህ ቅፅ በሁለት ቅጂ ተዘጋጅቶ አንዱ በተጠቃሚው ሌላው በንብረት አስተዳደር የስራ ክፍል እጅ ይቀመጣል፡፡" />
+                            </div>
+                            <div class="form-group textBoxMargin6px">
+                            <h:outputLabel for="name" value="5  የፕሮጀክትና ሚስጥራዊ   ንብረትን ካለ በዚህ ላይ አልተካተተም፡፡" />
+                            </div>
+                            <div class="form-group textBoxMargin6px">
+                            <h:outputLabel for="name" value="6  የሌላውን ሰው ንብረት የለ ህጋዊ ርክክብ መጠቀም አይፈቀድም፡፡" />
+                            </div>
+                            <div class="form-group textBoxMargin6px">
+                            <h:outputLabel for="name" value="7  ከላይ የተዘረዘሩት ንብረቶች በድንገተኛ (አመታዊ) ንብረት ቆጠራ ካልተገኙ ንብረቱን በተገዛበት ዋጋ እንዲተኩ ይደረጋል፡፡" />
+                            </div> -->
+                            </h:panelGroup>
+                    </div>
+                </div>
+
+            </h:panelGroup>
+        </h:form>
+    </ui:define>
+</ui:composition>
